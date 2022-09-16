@@ -1,0 +1,7 @@
+.HomePage-container{
+    display: flex;
+    position: absolute;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    background: linear-gradient(to right, rgb(140, 166, 219), rgb(185, 147, 214));
+}

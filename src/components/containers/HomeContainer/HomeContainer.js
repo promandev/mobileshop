@@ -4,8 +4,13 @@ import './HomeContainer.css'
 function HomeContainer() {
   return (
     <div className='HomeContainer'>
-
-    </div>
+        <div className='HomeContainer-Header'>
+          HOLA MUNDO
+        </div>
+        <div className='HomeContainer-Body'>
+          BODY
+        </div>
+    </div >
   )
 }
 
