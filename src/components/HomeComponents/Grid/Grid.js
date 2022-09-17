@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { Context as ProductsContext} from "../../../context/productsContext"
+
 
 const MOCK_DATA = [
     {
@@ -40,6 +42,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ResponsiveGrid() {
+  const { state: productState } = useContext(ProductsContext)
+
+  console.log('esto que es', productState)
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} >

@@ -1,0 +1,6 @@
+{
+    "BASE_URL": "https://front-test-api.herokuapp.com/api",
+    "product": "/product",
+    "productId": "/:id",
+    "cart": "/cart"
+}
