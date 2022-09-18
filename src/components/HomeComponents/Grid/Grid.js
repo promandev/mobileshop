@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Context as ProductsContext} from "../../../context/productsContext"
+import CardComponent from '../Card/CardComponent';
 
 
 const MOCK_DATA = [
@@ -43,15 +44,16 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function ResponsiveGrid() {
   const { state: productState } = useContext(ProductsContext)
-
-  console.log('esto que es', productState)
+  // {console.log('tatarara', productState.products)}
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} >
-        {MOCK_DATA.map((item, index) => (
-          <Grid item xs={6} sm={4} md={3} key={index}>
-            <Item>{item.item}</Item>
+        {productState.products.map((item, index) => (
+          <Grid item xs={6} sm={4} md={3} >
+            <Item key={index}>
+              <CardComponent key={item.id} image={item.image} brand={item.brand} model={item.model} />
+            </Item>
           </Grid>
         ))}
       </Grid>

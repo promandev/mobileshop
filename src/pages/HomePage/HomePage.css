@@ -1,6 +1,5 @@
 .HomePage-container{
     display: flex;
     position: absolute;
-    height: -webkit-fill-available;
     width: -webkit-fill-available;
     background: linear-gradient(to right,#B0DAB9 25%, #DAD299);}

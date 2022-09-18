@@ -1,6 +1,6 @@
 import api from '../api/createAxiosResponseInterceptor';
 
-export const apiRequestHandler = async (endpoint, method = "get", body = undefined, token = null, signout = null) => {
+export const apiRequestHandler = async (endpoint, method = "get", body = undefined,) => {
     return new Promise((resolve, reject) => {
         try {
             const HEADERS = { Authorization: null, Accept: "application/json" };
@@ -19,7 +19,6 @@ export const apiRequestHandler = async (endpoint, method = "get", body = undefin
                             case 401:
                             case 500:
                                 try {
-                                    if (signout) signout();
                                 } catch(e){}                                    
                             default:
                                 return reject({ status: response.status, data: response.data });
@@ -29,9 +28,7 @@ export const apiRequestHandler = async (endpoint, method = "get", body = undefin
             }).catch(error => {
                 console.log("error1::", error);
                 try {
-                    if (signout && error && error.response && error.response.status && error.response.status === 401) {
-                        signout();
-                    }
+                    console.log('')
                 } catch(e) {}
                 reject({status: 500, message: error });
             });        

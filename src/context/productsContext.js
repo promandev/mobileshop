@@ -2,9 +2,10 @@ import React from "react";
 import createDataContext from "./createDataContext";
 import API_URL from "../api/endpoints.json"
 import { apiRequestHandler } from '../helpers/utils';
+import axios from 'axios';
 
 const INITIAL_STATE = {
-
+    products: [],
 }
 
 const productsReducer = (state = INITIAL_STATE, action) => {
@@ -12,8 +13,14 @@ const productsReducer = (state = INITIAL_STATE, action) => {
         case 'get_products':
             return {
                 ...state,
-                INITIAL_STATE: action.payload
+                products: action.payload
             };
+        case 'reset_products':
+            return {
+                ...state,
+                products: INITIAL_STATE.products
+            };        
+            
     //     case 'get_productId':
     //         return {
     //             ...state,
@@ -24,28 +31,23 @@ const productsReducer = (state = INITIAL_STATE, action) => {
     //             ...state,
     //             cart: action.payload
     //         };
-    //     case 'reset_data':
-    //         return {
-    //             ...state,
-    //             resetData: action.payload
-    //         };   
     // }
     }
 }
 
-const getProducts = (dispatch) => {
+const getProducts = async function (dispatch){
+    const url = 'https://front-test-api.herokuapp.com/api/product'
+    var data = await fetch (url)
+    var response = await data.json();
+    if (data.ok) {
+        dispatch({ type: 'get_products', payload: response });
+        return response;    
+    }
+}
 
-    return async (signout) => {
-        var url = API_URL
-        url = url + API_URL.product
-        
-        return await apiRequestHandler(url, 'get', undefined, signout).then(
-            response => {
-                dispatch({ type: 'get_prodcuts', payload: response });
-            },
-        ).catch((err) => {
-            return null
-        })
+const resetProducts = (dispatch) => {
+    return async () => {
+        dispatch({ type: 'reset_products' });
     }
 }
 
@@ -53,6 +55,8 @@ export const { Provider, Context } = createDataContext(
     productsReducer,
     {
         getProducts,
+        resetProducts,
+
     },
 
     INITIAL_STATE
