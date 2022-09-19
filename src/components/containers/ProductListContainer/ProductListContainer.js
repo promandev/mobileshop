@@ -1,11 +1,16 @@
 import React from 'react';
+import Header from '../../shared/Header/Header';
 import './ProductListContainer.css'
 
 function ProductListContainer() {
   return (
     <div className='ProductListContainer'>
-
-    </div>
+        <Header/>
+        <div className='ProductListContainer-Body'>
+          <div className='ProductListContainer-searchBarWrapper'>
+          </div>
+        </div>
+    </div >
   )
 }
 

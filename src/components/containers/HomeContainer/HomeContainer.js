@@ -1,14 +1,13 @@
 import React from 'react';
 import GridComponent from '../../HomeComponents/Grid/Grid';
 import SearchBar from '../../HomeComponents/SearchBar/SearchBar';
+import Header from '../../shared/Header/Header';
 import './HomeContainer.css'
 
 function HomeContainer() {
   return (
     <div className='HomeContainer'>
-        <div className='HomeContainer-Header'>
-          HOLA MUNDO
-        </div>
+        <Header/>
         <div className='HomeContainer-Body'>
           <div className='HomeContainer-searchBarWrapper'>
             <div className='HomeContainer-searchBar'>

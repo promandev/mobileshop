@@ -8,8 +8,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<HomePage/>}/>
-      {console.log('pasa por aqui')}
-      <Route path='/productDetail' element={<ProductDetailPage/>}/>
+      <Route exact path='/productDetail/id:mobleId' element={<ProductDetailPage/>}/>
     </Routes>
   );
 }

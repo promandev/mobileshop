@@ -4,13 +4,20 @@ import Paper from '@mui/material/Paper';
 import { Context as ProductsContext} from "../../../context/productsContext";
 import Grid from '@mui/material/Grid';
 import './CardComponent.css'
+import { useNavigate, useParams } from 'react-router-dom';
 
+function CardComponent() {
+  const { state: productState, setActualProductId } = useContext(ProductsContext)
+  let { mobileId } = useParams()
+  const navigate = useNavigate()
 
-
-
-function CardComponent(image, brand, model, price) {
-  const { state: productState } = useContext(ProductsContext)
-
+  const onClickHandler = (id) => {
+    mobileId = id;
+    console.log('dado')
+    setActualProductId(mobileId.toString())
+    navigate(`/productDetail/id:${mobileId}`
+    )
+  }
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -29,8 +36,8 @@ function CardComponent(image, brand, model, price) {
     <>
     {productState.products.map((item, index) => {
       return (
-        <Grid item xs={12} sm={6} md={4} lg={3} style={{textAlign: '-webkit-center'}} >
-          <Item key={item.id}>                
+        <Grid item xs={12} sm={6} md={4} lg={3} style={{textAlign: '-webkit-center'}} key={index}>
+          <Item key={item.id} onClick={() => onClickHandler(item.id)}>                
             <div className='CardComponent-container'>
               <div className='CardComponent-wrapper'>
                 <div className='CardComponent-image'>
