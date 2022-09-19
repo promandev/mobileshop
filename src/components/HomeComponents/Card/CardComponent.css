@@ -1,0 +1,33 @@
+
+.CardComponent-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.CardComponent-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.CardComponent-imageDimension{
+    display: flex;
+    height: 212px;
+    width: 160px;
+}
+.CardComponent-info{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.CardComponent-infoWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 75%;
+    text-align: left;
+}
+.CardComponent-info__price{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

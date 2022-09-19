@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import createDataContext from "./createDataContext";
 import API_URL from "../api/endpoints.json"
 import { apiRequestHandler } from '../helpers/utils';
@@ -35,13 +35,20 @@ const productsReducer = (state = INITIAL_STATE, action) => {
     }
 }
 
-const getProducts = async function (dispatch){
+const GetProducts = async function (dispatch){
+    const [firstRequest, setFirstRequest] = useState(true)
+
     const url = 'https://front-test-api.herokuapp.com/api/product'
     var data = await fetch (url)
     var response = await data.json();
-    if (data.ok) {
+    if (data.ok && firstRequest) {
+        console.log('asdasd', response)
+        setFirstRequest(false)
         dispatch({ type: 'get_products', payload: response });
         return response;    
+    }
+    if (firstRequest == false) {
+        return null
     }
 }
 
@@ -54,10 +61,11 @@ const resetProducts = (dispatch) => {
 export const { Provider, Context } = createDataContext(
     productsReducer,
     {
-        getProducts,
+        GetProducts,
         resetProducts,
 
     },
 
-    INITIAL_STATE
+    INITIAL_STATE,
+    console.log('veamos a ver', INITIAL_STATE.products.products)
 )

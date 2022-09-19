@@ -33,7 +33,7 @@
 }
 .HomeContainer-gridWrapper{
     display: flex;
-    margin-top: 12px;
+    margin-top: 40px;
 }
 .HomeContainer-grid{
     width: -webkit-fill-available;
