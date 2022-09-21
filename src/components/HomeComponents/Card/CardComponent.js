@@ -1,22 +1,45 @@
-import React, {useContext} from 'react';
+import React, {useContext, useRef, useEffect, useState} from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { Context as ProductsContext} from "../../../context/productsContext";
+import { Context as ProductDetailsContext} from "../../../context/productDetailsContext";
 import Grid from '@mui/material/Grid';
 import './CardComponent.css'
 import { useNavigate, useParams } from 'react-router-dom';
 
 function CardComponent() {
-  const { state: productState, setActualProductId } = useContext(ProductsContext)
-  let { mobileId } = useParams()
+  const { state: productState, state,   GetProduct, getProduct } = useContext(ProductsContext)
+  const { state: productDetailState, setActualProductId, getProductId } = useContext(ProductDetailsContext)
+  const [ isLoading, setIsLoading ] = useState(true)
+  const [ uniqueId, setUniqueId ] = useState('')
   const navigate = useNavigate()
+  const refItem = useRef(null)
 
-  const onClickHandler = (id) => {
-    mobileId = id;
-    console.log('dado')
-    setActualProductId(mobileId.toString())
-    navigate(`/productDetail/id:${mobileId}`
-    )
+  useEffect(() => {
+    if (isLoading) {
+      async function fetchData() {
+        await GetProduct()
+        setIsLoading(false)
+      }
+      fetchData()
+    }
+  }, [isLoading])
+  
+  useEffect(() => {
+    async function setData() {
+      setActualProductId(uniqueId)
+    }
+
+    if (uniqueId.length) {
+      navigate(`productDetail/${uniqueId}`)
+    }
+    setData()
+  }, [uniqueId])
+
+  const onClickHandler = event => {
+    var newId = event.currentTarget.id;
+    setUniqueId(newId);
+
   }
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -37,7 +60,7 @@ function CardComponent() {
     {productState.products.map((item, index) => {
       return (
         <Grid item xs={12} sm={6} md={4} lg={3} style={{textAlign: '-webkit-center'}} key={index}>
-          <Item key={item.id} onClick={() => onClickHandler(item.id)}>                
+          <Item id={item.id} key={item.id} onClick={onClickHandler}>                
             <div className='CardComponent-container'>
               <div className='CardComponent-wrapper'>
                 <div className='CardComponent-image'>

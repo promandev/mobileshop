@@ -1,14 +1,33 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import './Header.css'
 import { useNavigate } from 'react-router-dom';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
-import './Header.css'
+import { Context as ProductsContext } from '../../../context/productsContext'
 
 function Header() {
     const navigate = useNavigate()
+    const { state: productState, resetActualProductId, GetProducts, setActualProductId } = useContext(ProductsContext)
 
-    const handleOnClick = () => {
-        console.log('botón dado')
+    // useEffect(() => {
+    //     if (goingBack) {
+    //         resetActualProductId()
+    //     }
+    //     }, [goingBack])
+
+
+    // const handleOnClick =  () => {
+    //     setGoingBack(true)
+
+    //     if (goingBack) {
+    //         navigate('/')
+    //     }
+    // }
+
+
+
+    const handleOnClick =  () => {
         navigate('/')
+        setActualProductId('')
     }
 
     return (

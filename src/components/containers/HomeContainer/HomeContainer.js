@@ -17,9 +17,6 @@ function HomeContainer() {
           <div className='HomeContainer-gridWrapper'>
             <div className='HomeContainer-grid'>
               <GridComponent/>
-              {/* <div className='HomeContainer-grid__card'>
-
-              </div> */}
             </div>
           </div>
         </div>
