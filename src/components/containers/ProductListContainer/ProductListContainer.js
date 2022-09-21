@@ -6,12 +6,24 @@ import { Context as ProductDetailsContext} from "../../../context/productDetails
 import Header from '../../shared/Header/Header';
 import ShoppingCart from '../../shared/ShoppingCart/ShoppingCart';
 
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+
 
 function ProductListContainer() {
   const { state: productState} = useContext(ProductsContext)
   const { state: productDetailsState, getProductId } = useContext(ProductDetailsContext)
   const [ isLoading, setIsLoading ] = useState(true)
-
+  const [color, setColor] = useState();
+  const [memory, setMemory] = useState();
+  
+  const item = productDetailsState.productId
+  const storage = item.internalMemory
+  const colors = item.colors
+  
   useEffect(() => {
     if (isLoading) {
       async function fetchData() {
@@ -24,19 +36,24 @@ function ProductListContainer() {
       setIsLoading(true)
     }
     }, [isLoading])
-  const item = productDetailsState.productId
-  const storage = item.internalMemory
-  const colors = item.colors
+
+  const handleChangeColor = (event) => {
+    setColor(event.target.value);
+  };
+
+  const handleChangeMemory = (event) => {
+    setMemory(event.target.value);
+  };
     
     return (
       <div className='ProductListContainer'>
         <Header/>
         <div className='ProductListContainer-body'>
           <div className='ProductListContainer-bodyWrapper'>
-            <div className='ProductListContainer-phoneImage'>
-              <img src={item.imgUrl}/>
-            </div>
             <div className='ProductListContainer-infoWrapper'>
+              <div className='ProductListContainer-phoneImage'>
+                <img src={item.imgUrl}/>
+              </div>
               <div className='ProductListContainer-infoDescription'>
                 <ol>
                   { item.brand ? <ol>Marca: {item.brand}</ol> : null }
@@ -53,38 +70,59 @@ function ProductListContainer() {
                   { item.weight ? <ol>Peso: {item.weight}gr.</ol> : null }
                 </ol>
               </div>
-              <div className='ProductListContainer-infoActions'>
-                <div className='ProductListContainer-infoActions__storage'>
-                  {
-                    storage ? (
-                      item.internalMemory.map((item) => {
-                        return (
-                          <div className='ProductListContainer-infoActions__storageButton'>
-                            {item}
-                          </div>
-                        )
-                      })
-                    ) : null  
-                  }             
-                </div>
-                <div className='ProductListContainer-infoActions__colour'>
-                {
-                    colors ? (
-                      item.colors.map((item) => {
-                        return (
-                          <div className='ProductListContainer-infoActions__colorsButton'>
-                            {item}
-                          </div>
-                        )
-                      })
-                    ) : null  
-                  }  
-                </div>
-                <div className='ProductListContainer-infoActions__addToCart'>
-                  <ShoppingCart/>
-                </div>
-              </div>
             </div>
+            <div className='ProductListContainer-infoActions'>
+              {
+                storage ? ( 
+                  <div className='ProductListContainer-infoActions__storage'>
+                  <span>Memoria</span>
+                  <div className='ProductListContainer-infoActions__selector'>
+                    {             
+                      item.internalMemory.map((item, index) => {
+                        return (
+                          <FormControl>
+                            <RadioGroup
+                              row
+                              aria-labelledby="demo-row-radio-buttons-group-label"
+                              name="row-radio-buttons-group"
+                              value={memory}
+                              onChange={handleChangeMemory}
+                            >
+                              <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
+                            </RadioGroup>
+                          </FormControl>
+                        )
+                    })}
+                    </div>
+                  </div>) : null 
+                } 
+                {
+                  colors ? ( 
+                    <div className='ProductListContainer-infoActions__storage'>
+                    <span>Colores</span>
+                    <div className='ProductListContainer-infoActions__selector'>
+                      {             
+                        item.colors.map((item, index) => {
+                          return (
+                            <FormControl>
+                              <RadioGroup
+                                row
+                                aria-labelledby="demo-row-radio-buttons-group-label"
+                                name="row-radio-buttons-group"
+                                value={color}
+                                onChange={handleChangeColor}
+                              >
+                                <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
+                              </RadioGroup>
+                            </FormControl>
+                          )
+                      })}
+                      </div>
+                    </div>) : null 
+                  }               <div className='ProductListContainer-infoActions__addToCart'>
+                <ShoppingCart/>
+              </div>
+          </div>
           </div>
         </div>
     </div >
