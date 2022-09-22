@@ -17,13 +17,16 @@ function ProductListContainer() {
   const { state: productState} = useContext(ProductsContext)
   const { state: productDetailsState, getProductId } = useContext(ProductDetailsContext)
   const [ isLoading, setIsLoading ] = useState(true)
-  const [color, setColor] = useState();
-  const [memory, setMemory] = useState();
+  const [color, setColor] = useState('');
+  const [memory, setMemory] = useState('');
+  const [defaultColor, setDefaultColor] = useState('')
+  const [defaultStorage, setDefaultStorage] = useState('')
+
   
   const item = productDetailsState.productId
   const storage = item.internalMemory
   const colors = item.colors
-  
+
   useEffect(() => {
     if (isLoading) {
       async function fetchData() {
@@ -37,12 +40,28 @@ function ProductListContainer() {
     }
     }, [isLoading])
 
-  const handleChangeColor = (event) => {
+  useEffect(() => {
+    async function handleDefaultColor() {
+      if (colors.length === 1) {
+        setDefaultColor(colors[0])
+      }
+      console.log('pasa por el async', defaultColor)
+    }  
+    async function handleDefaultStorage() {
+      if (storage.length === 1) {
+        setDefaultStorage(storage[0])
+      }
+    }
+    handleDefaultColor();
+    handleDefaultStorage();
+  }, [defaultColor, defaultStorage])
+
+  const handleClickColor = (event) => {
     setColor(event.target.value);
   };
-
-  const handleChangeMemory = (event) => {
-    setMemory(event.target.value);
+  
+  const handleClickMemory = (event) => {
+    setMemory(event.target.value);    
   };
     
     return (
@@ -55,20 +74,20 @@ function ProductListContainer() {
                 <img src={item.imgUrl}/>
               </div>
               <div className='ProductListContainer-infoDescription'>
-                <ol>
-                  { item.brand ? <ol>Marca: {item.brand}</ol> : null }
-                  { item.model ? <ol>Modelo: {item.modelo}</ol> : null }
-                  { item.price ? <ol>Precio: {item.price} €</ol> : null }
-                  { item.cpu ? <ol>CPU: {item.cpu}</ol> : null }
-                  { item.ram ? <ol>RAM: {item.ram}</ol> : null }
-                  { item.so ? <ol>Sistema Operativo: {item.so}</ol> : null }
-                  { item.displayResolution ? <ol>Resolución de pantalla: {item.displayResolution}</ol> : null }
-                  { item.battery ? <ol>Batería: {item.battery}</ol> : null }
-                  { item.primaryCamera ? <ol>Cámara trasera: {item.primaryCamera}</ol> : null }
-                  { item.secondaryCmera ? <ol>Cámara delantera: {item.secondaryCmera}</ol> : null }
-                  { item.dimentions ? <ol>Dimensiones: {item.dimentions}</ol> : null }
-                  { item.weight ? <ol>Peso: {item.weight}gr.</ol> : null }
-                </ol>
+                {/* <span> */}
+                  { item.brand ? <span>- Marca: {item.brand}.</span> : null }
+                  { item.model ? <span>- Modelo: {item.modelo}.</span> : null }
+                  { item.price ? <span>- Precio: {item.price} €.</span> : null }
+                  { item.cpu ? <span>- CPU: {item.cpu}.</span> : null }
+                  { item.ram ? <span>- RAM: {item.ram}.</span> : null }
+                  { item.so ? <span>- Sistema Operativo: {item.so}.</span> : null }
+                  { item.displayResolution ? <span>- Resolución de pantalla: {item.displayResolution}.</span> : null }
+                  { item.battery ? <span>- Batería: {item.battery}.</span> : null }
+                  { item.primaryCamera ? <span>- Cámara trasera: {item.primaryCamera}.</span> : null }
+                  { item.secondaryCmera ? <span>- Cámara delantera: {item.secondaryCmera}.</span> : null }
+                  { item.dimentions ? <span>- Dimensiones: {item.dimentions}.</span> : null }
+                  { item.weight ? <span>- Peso: {item.weight}gr.</span> : null }
+                {/* </span> */}
               </div>
             </div>
             <div className='ProductListContainer-infoActions'>
@@ -81,12 +100,14 @@ function ProductListContainer() {
                       item.internalMemory.map((item, index) => {
                         return (
                           <FormControl>
+                            {console.log('amo a ver', item.length)}
                             <RadioGroup
                               row
                               aria-labelledby="demo-row-radio-buttons-group-label"
                               name="row-radio-buttons-group"
-                              value={memory}
-                              onChange={handleChangeMemory}
+                              value={storage}
+                              onClick={handleClickMemory}
+                              defaultValue={storage[0]}
                             >
                               <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
                             </RadioGroup>
@@ -103,15 +124,17 @@ function ProductListContainer() {
                     <div className='ProductListContainer-infoActions__selector'>
                       {             
                         item.colors.map((item, index) => {
+                          console.log('adfsagadhdgfhhadsgfghhadgsfghadsg', defaultColor)
                           return (
                             <FormControl>
                               <RadioGroup
                                 row
                                 aria-labelledby="demo-row-radio-buttons-group-label"
                                 name="row-radio-buttons-group"
-                                value={color}
-                                onChange={handleChangeColor}
-                              >
+                                value={colors}
+                                onClick={handleClickColor}
+                                defaultValue={colors[0]}
+                                >
                                 <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
                               </RadioGroup>
                             </FormControl>

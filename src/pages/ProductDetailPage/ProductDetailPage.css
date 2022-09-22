@@ -2,5 +2,5 @@
     display: flex;
     position: absolute;
     width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    min-height: -webkit-fill-available;
     background: linear-gradient(to right,#B0DAB9 25%, #DAD299);}
