@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Header.css'
 import { useNavigate } from 'react-router-dom';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
@@ -6,28 +6,23 @@ import { Context as ProductsContext } from '../../../context/productsContext'
 
 function Header() {
     const navigate = useNavigate()
-    const { state: productState, resetActualProductId, GetProducts, setActualProductId } = useContext(ProductsContext)
+    const { state: productState, resetActualProductId, GetProducts, setActualProductId } = useContext(ProductsContext);
+    const [ goingBack, setgoingBack ] = useState(false)
 
-    // useEffect(() => {
-    //     if (goingBack) {
-    //         resetActualProductId()
-    //     }
-    //     }, [goingBack])
-
-
-    // const handleOnClick =  () => {
-    //     setGoingBack(true)
-
-    //     if (goingBack) {
-    //         navigate('/')
-    //     }
-    // }
-
+    useEffect(() => {
+        async function resetStoragedData() {
+            if (goingBack) {
+                await resetActualProductId()
+            }
+        }
+        resetStoragedData()
+    },
+    [goingBack])
 
 
     const handleOnClick =  () => {
         navigate('/')
-        setActualProductId('')
+        setgoingBack(true)
     }
 
     return (

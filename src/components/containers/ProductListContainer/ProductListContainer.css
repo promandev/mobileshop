@@ -54,5 +54,7 @@
 .ProductListContainer-infoActions__selectorButton{
     margin: 10px;
 }
-
+.ProductListContainer-infoActions__submitToCart{
+    margin-top: 10px;
+}
 

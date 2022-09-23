@@ -59,6 +59,12 @@ const GetProducts = async  (dispatch) => {
     return response;
 }
 
+// const resetProductId = (dispatch) => {
+//     return async () => {
+//         dispatch({ type: 'reset_productId' });
+//     }
+// }
+
 export const { Provider, Context } = createDataContext(
     productsReducer,
     {
