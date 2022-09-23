@@ -32,7 +32,7 @@ const productDetailsReducer = (state = INITIAL_STATE, action) => {
         case 'reset_dataPrePostItemCart':
             return {
                 ...state,
-                itemDetailsToCart: INITIAL_STATE.productId
+                itemDetailsToCart: INITIAL_STATE.itemDetailsToCart
             }
     }
 }
@@ -54,7 +54,6 @@ const getProductId = (dispatch) => {
         const url = `https://front-test-api.herokuapp.com/api/product/${mobileId}`
         var data = await fetch(url)
         var response = await data.json();
-        console.log('aquí el response', response)
         dispatch({ type: 'get_productId', payload: response });
         return response;    
     }  
@@ -92,7 +91,8 @@ const postItemCart = () => {
         }
         var url = 'https://front-test-api.herokuapp.com/api/cart';
         fetch(url, requestOptions)
-        .then(response => response, alert('¡ARTÍCULO COMPRADO SATISFACTORIAMENTE!'))
+        .then(response => response)
+        .then(response => response.ok, alert('¡ARTÍCULO COMPRADO SATISFACTORIAMENTE!'))
         }
     }
 }

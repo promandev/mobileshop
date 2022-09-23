@@ -43,19 +43,11 @@ const productsReducer = (state = INITIAL_STATE, action) => {
     }
 }
 
-const GetProducts = async  (dispatch) => {
-    const [firstRequest, setFirstRequest] = useState(true)
-    
-    if (firstRequest) {
+const getProducts = async  (dispatch) => {
         const url = 'https://front-test-api.herokuapp.com/api/product'
         var data = await fetch(url)
         var response = await data.json();
-        
-        if (data.ok && firstRequest) {
-            setFirstRequest(false)
             dispatch({ type: 'get_products', payload: response });
-        }    
-    }
     return response;
 }
 
@@ -68,7 +60,7 @@ const GetProducts = async  (dispatch) => {
 export const { Provider, Context } = createDataContext(
     productsReducer,
     {
-        GetProducts,
+        getProducts,
     },
 
     INITIAL_STATE,

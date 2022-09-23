@@ -10,10 +10,10 @@ function SearchBar() {
           color: 'black',
         },
         '& .MuiInput-underline:after': {
-          borderBottomColor: 'black',
+          borderBottomcolor: 'black',
         },
         '& .MuiOutlinedInput-root': {
-            backgroundColor: '#DAD299',
+            backgroundcolor: '#DAD299',
           '& fieldset': {
             borderColor: 'black',
             color: 'black',            
@@ -25,7 +25,7 @@ function SearchBar() {
       });
       
   return (
-    <CssTextField label="Buscar" id="custom-css-outlined-input"  backgroundColor='red'></CssTextField>
+    <CssTextField label="Buscar" id="custom-css-outlined-input"  backgroundcolor='red'></CssTextField>
   )
 }
 

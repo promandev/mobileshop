@@ -20,11 +20,14 @@ export default function ShoppingCart() {
       if (iteration.id && iteration.colorCode && iteration.storageCode) {
         setItemIteration(+ 1)
       }
+      else {
+        setItemIteration(0)
+      }
     }
     fetchItemIteration()
   },
   [productDetailsState.itemDetailsToCart])
-  
+
   return (
     <div style={{ display: "block", }}>
       <div>
@@ -34,7 +37,7 @@ export default function ShoppingCart() {
             sx={{
                 "& .MuiBadge-badge": {
                 color: "lightgreen",
-                backgroundColor: "green"
+                backgroundcolor: "green"
                 }
             }} 
             badgeContent={itemIteration}

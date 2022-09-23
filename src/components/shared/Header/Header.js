@@ -2,11 +2,15 @@ import React, {useContext, useEffect, useState} from 'react';
 import './Header.css'
 import { useNavigate } from 'react-router-dom';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
-import { Context as ProductsContext } from '../../../context/productsContext'
+import { Context as ProductsContext } from '../../../context/productsContext';
+import { Context as ProductDetailsContext } from '../../../context/productDetailsContext'
+
 
 function Header() {
     const navigate = useNavigate()
-    const { state: productState, resetActualProductId, GetProducts, setActualProductId } = useContext(ProductsContext);
+    const { resetActualProductId } = useContext(ProductsContext);
+    const { resetProductId, resetDataPrePostItemCart } = useContext(ProductDetailsContext);
+
     const [ goingBack, setgoingBack ] = useState(false)
 
     useEffect(() => {
@@ -16,8 +20,9 @@ function Header() {
             }
         }
         resetStoragedData()
-    },
-    [goingBack])
+        resetProductId()
+        resetDataPrePostItemCart()
+    }, [goingBack])
 
 
     const handleOnClick =  () => {
@@ -29,7 +34,7 @@ function Header() {
         <div className='Header-container'>
             <div onClick={handleOnClick}>
                 <span >
-                    DMMY MOBILE SHOP
+                    GET YOURSELF A PHONE .COM
                 </span>        
             </div>
             <ShoppingCart/>

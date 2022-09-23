@@ -76,7 +76,6 @@ function ProductListContainer() {
       if (productDetailsState.itemDetailsToCart)
       {
         await postItemCart(productDetailsState.itemDetailsToCart)
-        setListSubmitted(false)
       }
     }
     postData()
@@ -102,7 +101,6 @@ function ProductListContainer() {
   }
 
   const handleClickAddToCart = () => {
-    console.log('onclick', productDetailsState)
     if (listToSubmit.id && listToSubmit.colorCode && listToSubmit.storageCode)
     {
       setListSubmitted(true)
