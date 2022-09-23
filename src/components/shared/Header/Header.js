@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import { Context as ProductsContext } from '../../../context/productsContext';
 import { Context as ProductDetailsContext } from '../../../context/productDetailsContext'
+import IconBreadcrumbs from '../Breadcrumbs/Breadcrumbs';
 
 
 function Header() {
@@ -32,10 +33,15 @@ function Header() {
 
     return (
         <div className='Header-container'>
-            <div onClick={handleOnClick}>
-                <span >
-                    GET YOURSELF A PHONE .COM
-                </span>        
+            <div className='Header-titleWrapper'>
+                <div className='Header-title' onClick={handleOnClick}>
+                    <span >
+                        GET YOURSELF A PHONE .COM
+                    </span>        
+                </div>
+                <div className='Header-breadcrumbs'>
+                    <IconBreadcrumbs/>
+                </div>
             </div>
             <ShoppingCart/>
     </div>

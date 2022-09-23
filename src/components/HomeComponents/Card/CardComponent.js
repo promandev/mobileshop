@@ -8,7 +8,7 @@ import './CardComponent.css'
 import { useNavigate, useParams } from 'react-router-dom';
 
 function CardComponent() {
-  const { state: productState, getProduct } = useContext(ProductsContext)
+  const { state: productState, state,   GetProduct, getProduct } = useContext(ProductsContext)
   const { state: productDetailState, setActualProductId, getProductId } = useContext(ProductDetailsContext)
   const [ isLoading, setIsLoading ] = useState(true)
   const [ uniqueId, setUniqueId ] = useState('')
@@ -18,7 +18,7 @@ function CardComponent() {
   useEffect(() => {
     if (isLoading) {
       async function fetchData() {
-        await getProduct()
+        await GetProduct()
         setIsLoading(false)
       }
       fetchData()
@@ -43,7 +43,7 @@ function CardComponent() {
   }
 
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundcolor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -60,7 +60,7 @@ function CardComponent() {
     {productState.products.map((item, index) => {
       return (
         <Grid item xs={12} sm={6} md={4} lg={3} style={{textAlign: '-webkit-center'}} key={index}>
-          <Item id={item.id} key={item.id} onClick={onClickHandler} key={index}>                
+          <Item id={item.id} key={item.id} onClick={onClickHandler}>                
             <div className='CardComponent-container'>
               <div className='CardComponent-wrapper'>
                 <div className='CardComponent-image'>
