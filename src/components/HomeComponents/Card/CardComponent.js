@@ -7,23 +7,13 @@ import Grid from '@mui/material/Grid';
 import './CardComponent.css'
 import { useNavigate, useParams } from 'react-router-dom';
 
-function CardComponent() {
+function CardComponent(itemData) {
   const { state: productState, state,   GetProduct, getProduct } = useContext(ProductsContext)
   const { state: productDetailState, setActualProductId, getProductId } = useContext(ProductDetailsContext)
   const [ isLoading, setIsLoading ] = useState(true)
   const [ uniqueId, setUniqueId ] = useState('')
   const navigate = useNavigate()
   const refItem = useRef(null)
-
-  useEffect(() => {
-    if (isLoading) {
-      async function fetchData() {
-        await GetProduct()
-        setIsLoading(false)
-      }
-      fetchData()
-    }
-  }, [isLoading])
   
   useEffect(() => {
     async function setData() {
@@ -55,9 +45,11 @@ function CardComponent() {
     width: '250px',
   }));
 
+  const itemSpreadData = itemData.itemData.itemData
+
   return (
     <>
-    {productState.products.map((item, index) => {
+    {itemSpreadData.map((item, index) => {
       return (
         <Grid item xs={12} sm={6} md={4} lg={3} style={{textAlign: '-webkit-center'}} key={index}>
           <Item id={item.id} key={item.id} onClick={onClickHandler}>                
