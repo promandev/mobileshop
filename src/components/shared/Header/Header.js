@@ -35,7 +35,7 @@ function Header() {
         <div className='Header-container'>
             <div className='Header-titleWrapper'>
                 <div className='Header-title' onClick={handleOnClick}>
-                    <span >
+                    <span className='text_large_bold'>
                         GET YOURSELF A PHONE .COM
                     </span>        
                 </div>

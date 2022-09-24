@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import './Breadcrumbs.css'
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
@@ -34,7 +35,9 @@ export default function IconBreadcrumbs() {
           onClick={handleClickFirstBreadcrumb}
         >
           <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-          Home
+          <span className='text_medium_semibold'>
+            Home
+          </span>
         </Link>
         {
             userInProductDetails ? 
@@ -45,7 +48,9 @@ export default function IconBreadcrumbs() {
                 onClick={handleClickSecondBreadcrumb}
                 >
                 <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-                Product Selected
+                <span className='text_medium_semibold'>
+                  Producto Seleccionado
+                </span>
                 </Link>
             : null
         }

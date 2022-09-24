@@ -27,6 +27,7 @@ export default function ShoppingCart() {
     fetchItemIteration()
   },
   [productDetailsState.itemDetailsToCart])
+  console.log(productDetailsState.itemDetailsToCart)
 
   return (
     <div style={{ display: "block", }}>

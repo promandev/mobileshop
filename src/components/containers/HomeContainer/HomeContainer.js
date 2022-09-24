@@ -1,5 +1,6 @@
-import React, {useContext, useRef, useEffect, useState} from 'react';
-import './HomeContainer.css'
+import React, {useContext, useCallback, useEffect, useState} from 'react';
+import './HomeContainer.css';
+import LinearProgress from '@mui/material/LinearProgress';
 import GridComponent from '../../HomeComponents/Grid/Grid';
 import SearchBar from '../../HomeComponents/SearchBar/SearchBar';
 import Header from '../../shared/Header/Header';
@@ -7,22 +8,27 @@ import { Context as ProductsContext} from "../../../context/productsContext";
 import { Context as ProductDetailsContext} from "../../../context/productDetailsContext";
 
 function HomeContainer() {
-  const { state: productState, state,   GetProduct, getProduct } = useContext(ProductsContext)
-  const { state: productDetailState, setActualProductId, getProductId } = useContext(ProductDetailsContext)
+  const { state: productState, getProducts } = useContext(ProductsContext)
   const [ isLoading, setIsLoading ] = useState(true)
   const [ dataTyped, setDataTyped ] = useState()
   const [ filteredData, setFilteredData ] = useState([])
 
-
   useEffect(() => {
     if (isLoading) {
       async function fetchData() {
-        await GetProduct()
+        await getProducts()
+        console.log('pasa')
         setIsLoading(false)
       }
       fetchData()
     }
   }, [isLoading])
+
+  useEffect(() => {
+    setTimeout(() => {
+      getProducts()
+    }, 216000000);
+  }, [productState]);
 
   useEffect(() => {
     async function searchData() {
@@ -32,19 +38,18 @@ function HomeContainer() {
       setFilteredData(filteredArray)
     }
     searchData()
-  }, [dataTyped])
+  }, [dataTyped && !isLoading])
 
   const handleOnChange = event => {
     setDataTyped(event.target.value)
   }
-  console.log(dataTyped)
 
   return (
     <div className='HomeContainer'>
         <Header/>
         <div className='HomeContainer-Body'>
           {
-            isLoading ? (
+            !isLoading ? (
               <>
                 <div className='HomeContainer-searchBarWrapper'>
                   <div className='HomeContainer-searchBar'>
@@ -59,7 +64,8 @@ function HomeContainer() {
                   </div>
                 </div>
               </>
-            ) : null
+            ) : 
+            <LinearProgress color="success" />
           }
         </div>
     </div >

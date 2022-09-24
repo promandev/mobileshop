@@ -61,15 +61,15 @@ function CardComponent(itemData) {
                 <div className='CardComponent-info'>
                   <div className='CardComponent-infoWrapper'>
                     <div className='CardComponent-info__brand'>
-                      <span>{item.brand}</span>
+                      <span className='text_medium_semibold'>{item.brand}</span>
                     </div>
                     <div className='CardComponent-info__model'>
-                      <span>{item.model}</span>
+                      <span className='text_medium_semibold'>{item.model}</span>
                     </div>
                   </div>
                   <div className='CardComponent-info__price'>
                     {
-                      item.price ? <span>{item.price} €</span> : <span>Agotado</span>
+                      item.price ? <span className='text_large_bold'>{item.price}€</span> : <span className='text_small_thin'>Agotado</span>
                     }
                   </div>
                 </div>

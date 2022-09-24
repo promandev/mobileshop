@@ -1,20 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react';
 import './ProductListContainer.css';
 
-import { Context as ProductsContext} from "../../../context/productsContext";
-import { Context as ProductDetailsContext} from "../../../context/productDetailsContext";
 import Header from '../../shared/Header/Header';
-import ShoppingCart from '../../shared/ShoppingCart/ShoppingCart';
-
+import LinearProgress from '@mui/material/LinearProgress';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import ButtonGroup from "@mui/material/ButtonGroup";
 import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import { Context as ProductDetailsContext} from "../../../context/productDetailsContext";
 
 const initialCartList = {}
 
@@ -90,14 +86,8 @@ function ProductListContainer() {
     setMemory(event.target.value);    
   };
 
-  // const handleRemoveItem = () => {
-  //   itemsToCart.pop()
-  //   setItemsToCart(itemsToCart)
-  // }
-
   const handleAddItem = () => {
     setItemsToCart({id: item.id, colorCode: color, storageCode: memory})
-    // setItemsToCart(current => [...current, {id: item.id, colorCode: color, storageCode: memory}])
   }
 
   const handleClickAddToCart = () => {
@@ -113,109 +103,126 @@ function ProductListContainer() {
     return (
       <div className='ProductListContainer'>
         <Header itemIterations/>
-        <div className='ProductListContainer-body'>
-          <div className='ProductListContainer-bodyWrapper'>
-            <div className='ProductListContainer-infoWrapper'>
-              <div className='ProductListContainer-phoneImage'>
-                <img src={item.imgUrl}/>
-              </div>
-              <div className='ProductListContainer-infoDescription'>
-                { item.brand ? <span>- Marca: {item.brand}.</span> : null }
-                { item.model ? <span>- Modelo: {item.modelo}.</span> : null }
-                { item.price ? <span>- Precio: {item.price} €.</span> : null }
-                { item.cpu ? <span>- CPU: {item.cpu}.</span> : null }
-                { item.ram ? <span>- RAM: {item.ram}.</span> : null }
-                { item.so ? <span>- Sistema Operativo: {item.so}.</span> : null }
-                { item.displayResolution ? <span>- Resolución de pantalla: {item.displayResolution}.</span> : null }
-                { item.battery ? <span>- Batería: {item.battery}.</span> : null }
-                { item.primaryCamera ? <span>- Cámara trasera: {item.primaryCamera}.</span> : null }
-                { item.secondaryCmera ? <span>- Cámara delantera: {item.secondaryCmera}.</span> : null }
-                { item.dimentions ? <span>- Dimensiones: {item.dimentions}.</span> : null }
-                { item.weight ? <span>- Peso: {item.weight}gr.</span> : null }
-              </div>
-            </div>
-            <div className='ProductListContainer-infoActions'>
-              {
-                storage ? ( 
-                  <div className='ProductListContainer-infoActions__storage'>
-                  <span>Memoria</span>
-                  <div className='ProductListContainer-infoActions__selector'>
-                    {             
-                      item.internalMemory.map((item, index) => {
-                        return (
-                          <FormControl>
-                            <RadioGroup
-                              row
-                              aria-labelledby="demo-row-radio-buttons-group-label"
-                              name="row-radio-buttons-group"
-                              value={memory}
-                              onClick={handleClickMemory}
-                              defaultValue={defaultStorage}
-                            >
-                              <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
-                            </RadioGroup>
-                          </FormControl>
-                        )
-                    })}
-                    </div>
-                  </div>) : null 
-                } 
-                {
-                  colors ? ( 
-                    <div className='ProductListContainer-infoActions__storage'>
-                    <span>Colores</span>
-                    <div className='ProductListContainer-infoActions__selector'>
-                      {             
-                        item.colors.map((item, index) => {
-                          return (
-                            <FormControl>
-                              <RadioGroup
-                                row
-                                aria-labelledby="demo-row-radio-buttons-group-label"
-                                name="row-radio-buttons-group"
-                                value={color}
-                                onClick={handleClickColor}
-                                defaultValue={defaultColor}
-                                >
-                                <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
-                              </RadioGroup>
-                            </FormControl>
-                          )
-                      })}
+          <div className='ProductListContainer-body'>
+            {
+              !isLoading ? (
+                <>
+                    <div className='ProductListContainer-bodyWrapper'>
+                      <div className='ProductListContainer-infoWrapper'>
+                        <div className='ProductListContainer-phoneImage'>
+                          <img src={item.imgUrl}/>
+                        </div>
+                        <div className='ProductListContainer-infoDescription'>
+                          { item.brand ? <span className='text_medium_thin'>- Marca: {item.brand}.</span> : null }
+                          { item.model ? <span className='text_medium_thin'>- Modelo: {item.modelo}.</span> : null }
+                          { item.price ? <span className='text_medium_thin'>- Precio: {item.price} €.</span> : null }
+                          { item.cpu ? <span className='text_medium_thin'>- CPU: {item.cpu}.</span> : null }
+                          { item.ram ? <span className='text_medium_thin'>- RAM: {item.ram}.</span> : null }
+                          { item.so ? <span className='text_medium_thin'>- Sistema Operativo: {item.so}.</span> : null }
+                          { item.displayResolution ? <span className='text_medium_thin'>- Resolución de pantalla: {item.displayResolution}.</span> : null }
+                          { item.battery ? <span className='text_medium_thin'>- Batería: {item.battery}.</span> : null }
+                          { item.primaryCamera ? <span className='text_medium_thin'>- Cámara trasera: {item.primaryCamera}.</span> : null }
+                          { item.secondaryCmera ? <span className='text_medium_thin'>- Cámara delantera: {item.secondaryCmera}.</span> : null }
+                          { item.dimentions ? <span className='text_medium_thin'>- Dimensiones: {item.dimentions}.</span> : null }
+                          { item.weight ? <span className='text_medium_thin'>- Peso: {item.weight}gr.</span> : null }
+                        </div>
                       </div>
-                    </div>) : null 
-                  }               
-              <div className='ProductListContainer-infoActions__addToCart'>
-              <ButtonGroup sx={{}}>
-                {/* <Button
-                  value={item}
-                  onClick={handleRemoveItem}
-                  sx={{color: 'black',
-                  border: '1px solid black'}}
-                >
-                  {" "}
-                  <RemoveIcon fontSize="small" />
-                </Button> */}
-                <Button
-                  value={item}
-                  onClick={handleAddItem}
-                  sx={{color: 'black',
-                  border: '1px solid black'}}
-                >
-                  {" "}
-                  <AddIcon fontSize="small" />
-                </Button>
-              </ButtonGroup>                
-              </div>
-              <div className='ProductListContainer-infoActions__submitToCart'>
-                <Button variant="contained" color="success" onClick={handleClickAddToCart}>
-                    Comprar
-                </Button>
-              </div>
-          </div>
-          </div>
+                      <div className='ProductListContainer-infoActions'>
+                        {
+                          storage ? ( 
+                            <div className='ProductListContainer-infoActions__storage'>
+                              <span className='text_medium_semibold'>Memoria</span>
+                            <div className='ProductListContainer-infoActions__selector'>
+                              {             
+                                item.internalMemory.map((item, index) => {
+                                  return (
+                                    <FormControl>
+                                      <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="row-radio-buttons-group"
+                                        value={memory}
+                                        onClick={handleClickMemory}
+                                        defaultValue={defaultStorage}
+                                      >
+                                        <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
+                                      </RadioGroup>
+                                    </FormControl>
+                                  )
+                              })}
+                              </div>
+                            </div>) : null 
+                          } 
+                          {
+                            colors ? ( 
+                              <div className='ProductListContainer-infoActions__storage'>
+                              <span className='text_medium_semibold'>Colores</span>
+                              <div className='ProductListContainer-infoActions__selector'>
+                                {             
+                                  item.colors.map((item, index) => {
+                                    return (
+                                      <FormControl>
+                                        <RadioGroup
+                                          row
+                                          aria-labelledby="demo-row-radio-buttons-group-label"
+                                          name="row-radio-buttons-group"
+                                          value={color}
+                                          onClick={handleClickColor}
+                                          defaultValue={defaultColor}
+                                          >
+                                          <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
+                                        </RadioGroup>
+                                      </FormControl>
+                                    )
+                                })}
+                                </div>
+                              </div>) : null 
+                            }               
+                          {
+                            item.price ? (
+                              <>
+                              <div className='ProductListContainer-infoActions__price'>
+                                <span className='text_extralarge_bold'>
+                                  {item.price}€
+                                </span>
+                              </div>
+                              <div className='ProductListContainer-infoActions__addToCart'>
+                                <ButtonGroup sx={{}}>
+                                  <Button
+                                    value={item}
+                                    onClick={handleAddItem}
+                                    sx={{color: 'black',
+                                    border: '1px solid black'}}
+                                  >
+                                    {" "}
+                                    <AddIcon fontSize="small" />
+                                  </Button>
+                                </ButtonGroup>                
+                              </div>
+                              <div className='ProductListContainer-infoActions__submitToCart'>
+                                <Button variant="contained" color="success" onClick={handleClickAddToCart}>
+                                    <span className='text_medium_semibold'>
+                                      Comprar
+                                    </span>
+                                </Button>
+                              </div>
+                              </>
+
+                            ) : 
+                            <div>
+                              <span className='text_medium_thin'>
+                                Este producto no está disponible temporalmente
+                              </span>
+                            </div>
+                          }
+                    </div>
+                    </div>
+                </>
+              ) :
+              <LinearProgress color="success" />
+            }
         </div>
-    </div >
+      </div >
   )
 }
 

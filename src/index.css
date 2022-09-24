@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'Lora-Regular';
+  src: local('Lora-Regular'),
+    url(./assets/fonts/ttf/Lora-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lora-SemiBold';
+  src: local('Lora-SemiBold'),
+    url(./assets/fonts/ttf/Lora-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lora-Bold';
+  src: local('Lora-Bold'),
+    url(./assets/fonts/ttf/Lora-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lora-Medium';
+  src: local('Lora-Medium'),
+    url(./assets/fonts/ttf/Lora-Medium.ttf) format('truetype');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

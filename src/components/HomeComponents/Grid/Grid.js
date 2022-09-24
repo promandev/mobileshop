@@ -9,7 +9,6 @@ function GridComponent(itemData) {
     <div className='Grid-container'>
       <Box sx={{ flexGrow: 1, justifyContent: 'center' }}>
         <Grid container spacing={{ xs: 2, md: 3 }} justifyContent={'center'}>
-
           <CardComponent itemData={itemData}/>
         </Grid>
       </Box>

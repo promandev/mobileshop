@@ -1,3 +1,5 @@
+@import "../../../assets/_main.css";
+
 .ProductListContainer{
     display: flex;
     flex-direction: column;
@@ -53,6 +55,9 @@
 }
 .ProductListContainer-infoActions__selectorButton{
     margin: 10px;
+}
+.ProductListContainer-infoActions__price{
+    margin: 10px
 }
 .ProductListContainer-infoActions__submitToCart{
     margin-top: 10px;
