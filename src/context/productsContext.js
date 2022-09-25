@@ -17,15 +17,12 @@ const productsReducer = (state = INITIAL_STATE, action) => {
 
 const getProducts = (dispatch) => {
     return async() => {
-        console.log('fetch')
             const url = 'https://front-test-api.herokuapp.com/api/product'
             var data = await fetch(url)
             var response = await data.json();
             
             if (data.ok) {
                 dispatch({ type: 'get_products', payload: response });
-                console.log('pasa si')
-                console.log(response)
                 return response;
             }
             else {

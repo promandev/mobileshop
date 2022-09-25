@@ -7,20 +7,6 @@ import { Context as ProductsContext} from "../../../context/productsContext";
 
 
 function SearchBar({handleChangeSearch, inputValue}) {
-  const { state: productState } = useContext(ProductsContext)
-  const [ dataTyped, setDataTyped ] = useState(null)
-
-  const handleOnChange = event => {
-    console.log('esto es el event', event.target.value)
-    setDataTyped(event.target.value)
-    
-    
-    productState.products.filter(brand => brand.includes(), model => model.includes(dataTyped)).map(filteredSearch => filteredSearch)
-    
-    // console.log('que hay', inpu)
-    
-    // console.log('esto es filtrado', filteredSearch)
-  }
 
     const CssTextField = styled(TextField)({
         '& label.Mui-focused': {

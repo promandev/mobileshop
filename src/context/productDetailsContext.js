@@ -91,8 +91,8 @@ const postItemCart = () => {
         }
         var url = 'https://front-test-api.herokuapp.com/api/cart';
         fetch(url, requestOptions)
-        .then(response => response)
         .then(response => response.ok, alert('¡ARTÍCULO COMPRADO SATISFACTORIAMENTE!'))
+        
         }
     }
 }

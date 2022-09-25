@@ -17,7 +17,6 @@ function HomeContainer() {
     if (isLoading) {
       async function fetchData() {
         await getProducts()
-        console.log('pasa')
         setIsLoading(false)
       }
       fetchData()

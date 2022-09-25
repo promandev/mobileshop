@@ -27,7 +27,6 @@ export default function ShoppingCart() {
     fetchItemIteration()
   },
   [productDetailsState.itemDetailsToCart])
-  console.log(productDetailsState.itemDetailsToCart)
 
   return (
     <div style={{ display: "block", }}>
@@ -35,12 +34,7 @@ export default function ShoppingCart() {
         {
           itemIteration > 0 ? 
             <Badge 
-            sx={{
-                "& .MuiBadge-badge": {
-                color: "lightgreen",
-                backgroundcolor: "green"
-                }
-            }} 
+            color="success"
             badgeContent={itemIteration}
         >
           <ShoppingCartIcon />{" "}
