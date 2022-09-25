@@ -1,11 +1,12 @@
-import React, {useContext, useCallback, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './HomeContainer.css';
 import LinearProgress from '@mui/material/LinearProgress';
 import GridComponent from '../../HomeComponents/Grid/Grid';
-import SearchBar from '../../HomeComponents/SearchBar/SearchBar';
+
 import Header from '../../shared/Header/Header';
+import TextField from '@mui/material/TextField';
+
 import { Context as ProductsContext} from "../../../context/productsContext";
-import { Context as ProductDetailsContext} from "../../../context/productDetailsContext";
 
 function HomeContainer() {
   const { state: productState, getProducts } = useContext(ProductsContext)
@@ -21,12 +22,15 @@ function HomeContainer() {
       }
       fetchData()
     }
-  }, [isLoading])
+  }, [])
 
   useEffect(() => {
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       getProducts()
     }, 216000000);
+    return() => {
+      clearTimeout(timer)
+    }
   }, [productState]);
 
   useEffect(() => {
@@ -37,7 +41,7 @@ function HomeContainer() {
       setFilteredData(filteredArray)
     }
     searchData()
-  }, [dataTyped && !isLoading])
+  }, [dataTyped])
 
   const handleOnChange = event => {
     setDataTyped(event.target.value)
@@ -52,7 +56,7 @@ function HomeContainer() {
               <>
                 <div className='HomeContainer-searchBarWrapper'>
                   <div className='HomeContainer-searchBar'>
-                    <SearchBar inputValue={dataTyped} handleChangeSearch={handleOnChange}/>
+                    <TextField color='success' value={dataTyped} onChange={handleOnChange} label="Buscar" id="custom-css-outlined-input"  backgroundcolor='red'></TextField>
                   </div>
                 </div>
                 <div className='HomeContainer-gridWrapper'>

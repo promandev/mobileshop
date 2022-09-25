@@ -23,7 +23,7 @@ function ColorInfo({colorMemory, handleClick, defaultValue}) {
                 onClick={handleClick}
                 defaultValue={defaultValue}
                 >
-                <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
+                    <FormControlLabel key={index} value={item} control={<Radio />} label={item} />
                 </RadioGroup>
             </FormControl>
             )
