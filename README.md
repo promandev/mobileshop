@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Getting Started with TimeToChangeYourPhone.com
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## How to get started
+
+First of all, make sure you have node and npm up to date. Type `npm install` in order to download and install all dependencies required for this project, as per they are already included in [package.json] file.
 
 ## Available Scripts
 
@@ -39,32 +43,38 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Different enviroments
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+However LOCAL, BUILD, TEST and LINT enviroments are already settled. Keep in mind that you may change enviroment and just build each one by running the following scripts: 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `npm run start-local`
 
-### Code Splitting
+Runs the app in the development mode at LOCAL enviroment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `npm run start-build`
 
-### Analyzing the Bundle Size
+Runs the app in the development mode at BUILD enviroment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### `npm run start-test`
 
-### Making a Progressive Web App
+Runs the app in the development mode at TEST enviroment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### `npm run start-lint`
 
-### Advanced Configuration
+Runs the app in the development mode at LINT enviroment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### `npm run build-local`
 
-### Deployment
+Builds the app for production at LOCAL enviroment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### `npm run build-build`
 
-### `npm run build` fails to minify
+Builds the app for production at BUILD enviroment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `npm run build-test`
+
+Builds the app for production at TEST enviroment
+
+### `npm run build-lint`
+
+Builds the app for production at LINT enviroment
