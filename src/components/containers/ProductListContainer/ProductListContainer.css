@@ -34,13 +34,6 @@
     align-self: center;
 }
 
-.ProductListContainer-infoDescription{
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
 .ProductListContainer-infoActions__storage{
     flex-direction: column;
     display: flex;

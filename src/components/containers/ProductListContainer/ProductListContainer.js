@@ -3,14 +3,13 @@ import './ProductListContainer.css';
 
 import Header from '../../shared/Header/Header';
 import LinearProgress from '@mui/material/LinearProgress';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import Button from '@mui/material/Button';
-import ButtonGroup from "@mui/material/ButtonGroup";
-import AddIcon from "@mui/icons-material/Add";
 import { Context as ProductDetailsContext} from "../../../context/productDetailsContext";
+import ProductInfo from '../../ProductDetailsComponents/ProductInfo/ProductInfo';
+import MemoryInfo from '../../ProductDetailsComponents/MemoryInfo/MemoryInfo';
+import ColorInfo from '../../ProductDetailsComponents/ColorInfo/ColorInfo';
+import AddToChartButton from '../../ProductDetailsComponents/AddToChartButton/AddToChartButton';
+import PurchaseButton from '../../HomeComponents/PurchaseButton/PurchaseButton';
+
 
 const initialCartList = {}
 
@@ -112,72 +111,21 @@ function ProductListContainer() {
                         <div className='ProductListContainer-phoneImage'>
                           <img src={item.imgUrl}/>
                         </div>
-                        <div className='ProductListContainer-infoDescription'>
-                          { item.brand ? <span className='text_medium_thin'>- Marca: {item.brand}.</span> : null }
-                          { item.model ? <span className='text_medium_thin'>- Modelo: {item.modelo}.</span> : null }
-                          { item.price ? <span className='text_medium_thin'>- Precio: {item.price} €.</span> : null }
-                          { item.cpu ? <span className='text_medium_thin'>- CPU: {item.cpu}.</span> : null }
-                          { item.ram ? <span className='text_medium_thin'>- RAM: {item.ram}.</span> : null }
-                          { item.so ? <span className='text_medium_thin'>- Sistema Operativo: {item.so}.</span> : null }
-                          { item.displayResolution ? <span className='text_medium_thin'>- Resolución de pantalla: {item.displayResolution}.</span> : null }
-                          { item.battery ? <span className='text_medium_thin'>- Batería: {item.battery}.</span> : null }
-                          { item.primaryCamera ? <span className='text_medium_thin'>- Cámara trasera: {item.primaryCamera}.</span> : null }
-                          { item.secondaryCmera ? <span className='text_medium_thin'>- Cámara delantera: {item.secondaryCmera}.</span> : null }
-                          { item.dimentions ? <span className='text_medium_thin'>- Dimensiones: {item.dimentions}.</span> : null }
-                          { item.weight ? <span className='text_medium_thin'>- Peso: {item.weight}gr.</span> : null }
-                        </div>
+                        <ProductInfo/>
                       </div>
                       <div className='ProductListContainer-infoActions'>
-                        {
-                          storage ? ( 
-                            <div className='ProductListContainer-infoActions__storage'>
-                              <span className='text_medium_semibold'>Memoria</span>
-                            <div className='ProductListContainer-infoActions__selector'>
-                              {             
-                                item.internalMemory.map((item, index) => {
-                                  return (
-                                    <FormControl>
-                                      <RadioGroup
-                                        row
-                                        aria-labelledby="demo-row-radio-buttons-group-label"
-                                        name="row-radio-buttons-group"
-                                        value={memory}
-                                        onClick={handleClickMemory}
-                                        defaultValue={defaultStorage}
-                                      >
-                                        <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
-                                      </RadioGroup>
-                                    </FormControl>
-                                  )
-                              })}
-                              </div>
-                            </div>) : null 
-                          } 
-                          {
-                            colors ? ( 
-                              <div className='ProductListContainer-infoActions__storage'>
-                              <span className='text_medium_semibold'>Colores</span>
-                              <div className='ProductListContainer-infoActions__selector'>
-                                {             
-                                  item.colors.map((item, index) => {
-                                    return (
-                                      <FormControl>
-                                        <RadioGroup
-                                          row
-                                          aria-labelledby="demo-row-radio-buttons-group-label"
-                                          name="row-radio-buttons-group"
-                                          value={color}
-                                          onClick={handleClickColor}
-                                          defaultValue={defaultColor}
-                                          >
-                                          <FormControlLabel id={index} value={item} control={<Radio />} label={item} />
-                                        </RadioGroup>
-                                      </FormControl>
-                                    )
-                                })}
-                                </div>
-                              </div>) : null 
-                            }               
+                        <div className='ProductListContainer-infoActions__storage'>
+                          <span className='text_medium_semibold'>Memoria</span>
+                        <div className='ProductListContainer-infoActions__selector'>
+                          <MemoryInfo itemMemory={memory} handleClick={handleClickMemory} defaultValue={defaultStorage}/>
+                        </div>
+                        </div>
+                        <div className='ProductListContainer-infoActions__storage'>
+                          <span className='text_medium_semibold'>Colores</span>
+                        <div className='ProductListContainer-infoActions__selector'>
+                          <ColorInfo colorMemory={color} handleClick={handleClickColor} defaultValue={defaultColor}/>
+                        </div>
+                        </div>
                           {
                             item.price ? (
                               <>
@@ -187,24 +135,10 @@ function ProductListContainer() {
                                 </span>
                               </div>
                               <div className='ProductListContainer-infoActions__addToCart'>
-                                <ButtonGroup sx={{}}>
-                                  <Button
-                                    value={item}
-                                    onClick={handleAddItem}
-                                    sx={{color: 'black',
-                                    border: '1px solid black'}}
-                                  >
-                                    {" "}
-                                    <AddIcon fontSize="small" />
-                                  </Button>
-                                </ButtonGroup>                
+                                <AddToChartButton value={item} onClick={handleAddItem}/>
                               </div>
                               <div className='ProductListContainer-infoActions__submitToCart'>
-                                <Button variant="contained" color="success" onClick={handleClickAddToCart}>
-                                    <span className='text_medium_semibold'>
-                                      Comprar
-                                    </span>
-                                </Button>
+                                <PurchaseButton onClick={handleClickAddToCart}/>
                               </div>
                               </>
 
